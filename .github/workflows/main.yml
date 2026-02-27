@@ -1,25 +1,20 @@
 name: AI News Automation
-
 on:
+  workflow_dispatch: # 이 코드가 있어야 수동 실행 버튼이 생깁니다!
   schedule:
     - cron: '0 23 * * *'
-  workflow_dispatch:
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
+      - uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
       - name: Install dependencies
         run: pip install requests openai
-
       - name: Run News Bot
         env:
           NAVER_ID: ${{ secrets.NAVER_ID }}
